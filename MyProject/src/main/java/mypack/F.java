@@ -2,7 +2,7 @@ package mypack;
 
 
 	public class F extends B{
-		public void jump()
+		public void jump()//
 		{
 			System.out.println("Animal");
 		}
