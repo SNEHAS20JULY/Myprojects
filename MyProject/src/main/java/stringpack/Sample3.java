@@ -1,0 +1,13 @@
+package stringpack;
+
+public class Sample3 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+String s="";
+String s1="SNEHA";
+System.out.println(s.isEmpty());
+System.out.println(s1.isEmpty());
+	}
+
+}
