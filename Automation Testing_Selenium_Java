@@ -1,0 +1,175 @@
+package Report;
+
+import java.time.Duration;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+public class Campaignss {
+
+    private WebDriver driver;
+    private WebDriverWait wait;
+
+    @BeforeClass
+    public void setUp() {
+        driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
+
+    @Test(priority = 1, description = "Navigate to Login Page")
+    public void navigateToLoginPage() {
+        driver.get("DemoURL");
+    }
+
+    @Test(priority = 2, description = "Enter Email")
+    public void enterEmail() {
+        WebElement email = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("email")));
+        email.sendKeys("demoemail@gmail.com");
+    }
+
+    @Test(priority = 3, description = "Enter Password")
+    public void enterPassword() {
+        WebElement password = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("password")));
+        password.sendKeys("Demopassword");
+    }
+
+    @Test(priority = 4, description = "Click Login Button")
+    public void clickLoginButton() {
+        driver.findElement(By.xpath("//button[@type='submit']")).click();
+    }
+
+    @Test(priority = 5, description = "Verify Successful Login")
+    public void verifySuccessfulLogin() {
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertTrue(currentUrl.contains("home"), "Login failed");
+    }
+
+    @Test(priority = 6, description = "Open Menu")
+    public void openMenu() {
+        WebElement menuIcon = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//i[@class='ri-menu-line text-xl cursor-pointer']")));
+        menuIcon.click();
+    }
+
+    @Test(priority = 7, description = "Navigate to Campaigns Section")
+    public void navigateToCampaigns() {
+        WebElement campaignsLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Campaigns']")));
+        campaignsLink.click();
+    }
+
+    @Test(priority = 8, description = "Click on NEW Link")
+    public void clickNewLink() {
+        WebElement newIcon = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='NEW']")));
+        newIcon.click();
+    }
+
+    @Test(priority = 9, description = "Verify New Section URL")
+    public void verifyNewSectionUrl() {
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertEquals(currentUrl, "url", "Navigation failed");
+    }
+
+    @Test(priority = 10, description = "Navigate Back to Home Page")
+    public void navigateBackToHomePage() {
+        driver.navigate().back();
+    }
+
+    @Test(priority = 11, description = "Click on Campaigns Link Again")
+    public void clickCampaignsLinkAgain() {
+        WebElement menuIcon = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//i[@class='ri-menu-line text-xl cursor-pointer']")));
+        menuIcon.click();
+        WebElement campaignsLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Campaigns']")));
+        campaignsLink.click();
+    }
+
+    @Test(priority = 12, description = "Click on TEts Link")
+    public void clickTEtsLink() {
+        WebElement TEts = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='TEts']")));
+        TEts.click();
+    }
+
+    @Test(priority = 13, description = "Verify TEts Section URL")
+    public void verifyTEtsSectionUrl() {
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertEquals(currentUrl, "url", "Navigation failed");
+    }
+
+    @Test(priority = 14, description = "Search Functionality with Invalid Input")
+    public void searchFunctionalityWithInvalidInput() {
+        WebElement searchbar = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@class, 'MuiInputBase-input')]")));
+        searchbar.clear();
+        searchbar.sendKeys("tell", Keys.RETURN);
+        WebElement noResultsMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'No results found')]")));
+        Assert.assertTrue(noResultsMessage.isDisplayed(), "No results message not displayed");
+    }
+
+    @Test(priority = 15, description = "Search Functionality with Valid Input")
+    public void searchFunctionalityWithValidInput() {
+        WebElement searchbar = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@class, 'MuiInputBase-input')]")));
+        searchbar.clear();
+        searchbar.sendKeys("name", Keys.RETURN);
+        WebElement searchResult = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'MuiBox-root')]")));
+        Assert.assertTrue(searchResult.isDisplayed(), "Search result not displayed");
+    }
+
+    @Test(priority = 16, description = "Functionality of Close Icon")
+    public void closeIconFunctionality() {
+        WebElement closeIcon = wait.until(ExpectedConditions.elementToBeClickable(By.className("ri-close-line")));
+        closeIcon.click();
+        WebElement searchbar = driver.findElement(By.xpath("//input[contains(@class, 'MuiInputBase-input')]"));
+        Assert.assertEquals(searchbar.getAttribute("value"), "", "Search bar not cleared");
+    }
+
+    @Test(priority = 17, description = "Functionality of Filter Section")
+    public void filterFunctionality() {
+        WebElement filter = driver.findElement(By.xpath("//i[@class='ri-filter-line']"));
+        filter.click();
+        WebElement select = driver.findElement(By.xpath("//div[@id='demo-dialog-select']"));
+        select.click();
+        WebElement option = driver.findElement(By.xpath("//li[@data-value='Pending']"));
+        option.click();
+        WebElement ok = driver.findElement(By.xpath("//button[contains(text(), 'Ok')]"));
+        ok.click();
+    }
+
+    @Test(priority = 18, description = "Functionality of Filtered Results")
+    public void searchResult() {
+        WebElement searchResult1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'MuiBox-root')]")));
+        Assert.assertTrue(searchResult1.isDisplayed(), "Filtered results not displayed");
+    }
+
+    // New Test: Logout Functionality
+    @Test(priority = 19, description = "Logout Functionality")
+    public void logoutFunctionality() {
+        WebElement profileIcon = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//i[@class='ri-user-line']")));
+        profileIcon.click();
+        WebElement logoutButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Logout']")));
+        logoutButton.click();
+        Assert.assertTrue(driver.getCurrentUrl().contains("login"), "Logout failed");
+    }
+
+    // New Test: Invalid Login Attempt
+    @Test(priority = 20, description = "Invalid Login Attempt")
+    public void invalidLoginAttempt() {
+        driver.get("url");
+        WebElement email = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("email")));
+        email.sendKeys("invalid@gmail.com");
+        WebElement password = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("password")));
+        password.sendKeys("wrongpassword");
+        driver.findElement(By.xpath("//button[@type='submit']")).click();
+        WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'Invalid credentials')]")));
+        Assert.assertTrue(errorMessage.isDisplayed(), "Error message not displayed");
+    }
+
+    @AfterClass
+    public void tearDown() {
+        driver.quit();
+    }
+}
