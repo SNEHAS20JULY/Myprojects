@@ -25,8 +25,8 @@ public class Parabank {
 				System.out.println(d+"  "+e+"  "+ f);
 		WebElement register=driver.findElement(By.xpath("//a[normalize-space()='Register']"));
 				Boolean a= register.isEnabled();
-				Boolean b= 	register.isSelected();
-				Boolean c= 	register.isDisplayed();  //2) Boolean isDisplayed(): This method determines if an element is displayed or not.
+				Boolean b= register.isSelected();
+				Boolean c= register.isDisplayed();  //2) Boolean isDisplayed(): This method determines if an element is displayed or not.
 				System.out.println(a+"   "+b+"  "+c);
 				register.click();
 		//username
@@ -46,7 +46,7 @@ public class Parabank {
 	               Thread.sleep(2000);
 	    // Error message for invalid username and password
 		WebElement errortitle=driver.findElement(By.xpath("//h1[@class='title']"));
-				   boolean j=	   errortitle.isDisplayed();
+				   boolean j= errortitle.isDisplayed();
 		           System.out.println(j);
 		WebElement errorMessage=driver.findElement(By.xpath("//p[@class='error']"));
 							try{
