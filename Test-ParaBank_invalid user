@@ -1,0 +1,65 @@
+package Report;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+
+public class Parabank {
+
+	public static void main(String[] args) throws InterruptedException {
+		
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://parabank.parasoft.com/parabank/index.htm;jsessionid=A7E067B6280FE8019F4AB682E14B4233");
+		
+		//logovisbile
+		WebElement logo=driver.findElement(By.xpath("//img[@title='ParaBank']"));
+			    Boolean h=	logo.isDisplayed();
+			    System.out.println(h);
+		// click the register button
+		WebElement heading=driver.findElement(By.xpath("//h2[normalize-space()='Customer Login']"));
+				Boolean d= heading.isEnabled();
+				Boolean e= heading.isSelected();	// 1) Boolean isSelected(): This method determines if an element is selected or not. It returns true if the element is selected and false if it is not. 
+				Boolean f= heading.isDisplayed();   
+				System.out.println(d+"  "+e+"  "+ f);
+		WebElement register=driver.findElement(By.xpath("//a[normalize-space()='Register']"));
+				Boolean a= register.isEnabled();
+				Boolean b= 	register.isSelected();
+				Boolean c= 	register.isDisplayed();  //2) Boolean isDisplayed(): This method determines if an element is displayed or not.
+				System.out.println(a+"   "+b+"  "+c);
+				register.click();
+		//username
+		WebElement  username=driver.findElement(By.className("input"));
+					username.click();
+					username.clear();
+					username.sendKeys("hei");
+					Thread.sleep(2000);
+		//password
+		WebElement password=driver.findElement(By.xpath("//input[@type='password']"));
+				   password.click(); 
+				   password.clear();
+				   password.sendKeys("Hei");
+		//click
+	    WebElement login=driver.findElement(By.xpath("//input[@value='Log In']"));	
+	               login.click();
+	               Thread.sleep(2000);
+	    // Error message for invalid username and password
+		WebElement errortitle=driver.findElement(By.xpath("//h1[@class='title']"));
+				   boolean j=	   errortitle.isDisplayed();
+		           System.out.println(j);
+		WebElement errorMessage=driver.findElement(By.xpath("//p[@class='error']"));
+							try{
+									Assert.assertTrue(errorMessage.isDisplayed(), "Error message is not displayed!");
+									Assert.assertEquals(errorMessage.getText(), "The username and password could not be verified.");
+									System.out.println("Test Passed: Error message verified successfully.");
+								}
+							catch (AssertionError ae)
+								{
+									System.out.println("error");
+								}
+		driver.quit();
+	}
+
+}
+
