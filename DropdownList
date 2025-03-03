@@ -26,7 +26,17 @@ public class DropdownList {
 		System.out.println(selectedoptions);
 	if (select.isMultiple()) {
             System.out.println("This is a multi-select dropdown.");
-		}else {
+		 // Select multiple options
+            select.selectByIndex(1);
+            select.selectByIndex(2);
+
+            //  Verify selected options
+            List<WebElement> selectedOptions = select.getAllSelectedOptions();
+            System.out.println("Selected Options:");
+            for (WebElement option : selectedOptions) {
+                System.out.println(option.getText());
+            }
+else {
 			System.out.println("This is a not multi-select dropdown.");
 		}
 		
