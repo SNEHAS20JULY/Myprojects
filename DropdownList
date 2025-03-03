@@ -1,5 +1,7 @@
 package TheRedirect;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,17 +28,18 @@ public class DropdownList {
 		System.out.println(selectedoptions);
 	if (select.isMultiple()) {
             System.out.println("This is a multi-select dropdown.");
-		 // Select multiple options
+            // Select multiple options
             select.selectByIndex(1);
             select.selectByIndex(2);
 
-            //  Verify selected options
+            // Verify selected options
             List<WebElement> selectedOptions = select.getAllSelectedOptions();
             System.out.println("Selected Options:");
             for (WebElement option : selectedOptions) {
                 System.out.println(option.getText());
-            }
-else {
+            }	
+			}
+	else {
 			System.out.println("This is a not multi-select dropdown.");
 		}
 		
