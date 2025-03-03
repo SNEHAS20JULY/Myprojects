@@ -1,0 +1,22 @@
+package TheRedirect;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class InfiniteScrollTest {
+    public static void main(String[] args) throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://the-internet.herokuapp.com/infinite_scroll"); // Replace with actual infinite scroll page
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        // ✅ Scroll down multiple times
+        for (int i = 0; i < 5; i++) {  // Scroll 5 times (adjust as needed)
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);"); // Scroll down
+            Thread.sleep(2000); // Wait for new content to load
+        }
+
+        driver.quit(); // Close the browser
+    }
+}
