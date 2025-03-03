@@ -1,0 +1,38 @@
+package TheRedirect;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class Theredirect {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://the-internet.herokuapp.com");
+		String a=driver.getTitle();
+	System.out.println(a);
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[normalize-space()='Redirect Link']")));
+		driver.findElement(By.xpath("//a[normalize-space()='Redirect Link']")).click();
+		String b= driver.getCurrentUrl();
+	System.out.println(b);
+		WebElement heading=driver.findElement(By.xpath("//h3[normalize-space()='Redirection']"));
+		Boolean h=heading.isDisplayed();
+	System.out.println(h);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("redirect")));
+		driver.findElement(By.id("redirect")).click();
+		String c= driver.getCurrentUrl();
+	System.out.println(c);
+		WebElement s=driver.findElement(By.xpath("//h3[normalize-space()='Status Codes']"));
+		Boolean f=	wait.until(ExpectedConditions.visibilityOf(s)).isDisplayed();
+	System.out.println(f);
+		//driver.navigate().to("https://the-internet.herokuapp.com/redirector");
+	}
+
+}
