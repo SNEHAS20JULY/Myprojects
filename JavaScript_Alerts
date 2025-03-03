@@ -16,16 +16,16 @@ public class JavaScript_Alerts {
 				driver.findElement(By.xpath("//button[@onclick='jsAlert()']")).click();
 				Thread.sleep(2000);
 	   Alert alerts = driver.switchTo().alert();
-	   alerts.accept();
+	   			alerts.accept();
 	   			Thread.sleep(2000);
-	   driver.findElement(By.xpath("//button[@onclick='jsConfirm()']")).click();
+	 driver.findElement(By.xpath("//button[@onclick='jsConfirm()']")).click();
 	   			Thread.sleep(2000);
 	   			alerts.accept();
 	 driver.findElement(By.xpath("//button[@onclick='jsPrompt()']")).click();
-	 alerts.sendKeys("Hello Selenium!");
-	 alerts.accept();
+	 			alerts.sendKeys("Hello Selenium!");
+				 alerts.accept();
 	 			Thread.sleep(2000);
-	driver.quit();
+driver.quit();
 	
 }	
 }
