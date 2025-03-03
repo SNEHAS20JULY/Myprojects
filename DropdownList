@@ -1,0 +1,36 @@
+package TheRedirect;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class DropdownList {
+
+	public static void main(String[] args) throws InterruptedException {
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://the-internet.herokuapp.com");
+		String a=driver.getTitle();
+		driver.navigate().to("https://the-internet.herokuapp.com/dropdown");
+	WebElement Dropdown=driver.findElement(By.id("dropdown"));
+		Boolean d=Dropdown.isDisplayed();
+		System.out.println(d);
+		Dropdown.click();
+	Select select=new Select(Dropdown);
+		select.selectByIndex(2);
+		System.out.println("first option is selected");
+		Thread.sleep(2000);
+	WebElement selectedoption=select.getFirstSelectedOption();
+		String selectedoptions=selectedoption.getText();
+		System.out.println(selectedoptions);
+	if (select.isMultiple()) {
+            System.out.println("This is a multi-select dropdown.");
+		}else {
+			System.out.println("This is a not multi-select dropdown.");
+		}
+		
+		driver.quit();
+	}
+
+}
