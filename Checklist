@@ -1,0 +1,45 @@
+package TheRedirect;
+
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class Checkbox {
+
+	public static void main(String[] args) throws InterruptedException {
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://the-internet.herokuapp.com");	
+		driver.navigate().to("https://the-internet.herokuapp.com/checkboxes");
+		WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h3[normalize-space()='Checkboxes']")));
+		Boolean a=driver.findElement(By.xpath("//h3[normalize-space()='Checkboxes']")).isDisplayed();
+		System.out.println(a);
+		
+		  List<WebElement> checkboxes = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//form[@id='checkboxes']/input")));
+
+	        // Get checkbox states
+	        Boolean checkbox1Selected = checkboxes.get(0).isSelected();
+	        Boolean checkbox2Selected = checkboxes.get(1).isSelected();
+	        // Print results
+	        System.out.println("Checkbox 1 Selected: " + checkbox1Selected);
+	        System.out.println("Checkbox 2 Selected: " + checkbox2Selected);
+	        
+	       if(!checkboxes.get(0).isSelected()) {
+	    	   checkboxes.get(0).click();
+	       }
+	       if(checkboxes.get(1).isSelected()) {
+	    	   checkboxes.get(1).click();	   
+	       }
+	       
+	       Thread.sleep(2000);
+	driver.quit();
+	}
+
+}
