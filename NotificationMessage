@@ -1,0 +1,29 @@
+package TheRedirect;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class NotificationMessage {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+WebDriver driver=new ChromeDriver();
+driver.get("https://the-internet.herokuapp.com/notification_message_rendered");
+driver.findElement(By.xpath("//a[normalize-space()='Click here']")).click();
+WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(10));
+WebElement a=wait.until(ExpectedConditions.presenceOfElementLocated(By.id("flash")));
+String b=a.getText();
+if(b.contains(" Action successful")) {
+	 System.out.println("✅ Test Passed: Success message is displayed.");
+}
+	else {
+		 System.out.println("✅ Test failed: Success message is displayed.");
+	}
+}
+}
