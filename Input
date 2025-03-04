@@ -1,0 +1,40 @@
+package TheRedirect;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Input_redirect {
+
+	public static void main(String[] args) {
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://the-internet.herokuapp.com/inputs");
+		WebElement a=	driver.findElement(By.xpath("//input[@type='number']"));
+		Boolean b=a.isEnabled();
+		System.out.println(b);
+   try {
+	   a.sendKeys("f");
+   }
+   catch(Exception e){
+	    
+		System.out.println("is not accepatble");
+   }
+   
+   try {
+	   a.sendKeys("1");
+	   System.out.println("accepatble");
+   }
+   catch(Exception e){
+	    
+		System.out.println("accepatble");
+
+   }
+   finally {
+       driver.quit();
+   }
+	   
+   }
+
+	}
+
