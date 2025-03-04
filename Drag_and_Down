@@ -20,6 +20,7 @@ public class Drag_and_Down {
 		WebElement b=wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("column-b")));
 		Actions action= new Actions(driver);
 		action.dragAndDrop(a, b).build().perform();
+		action.clickAndHold(a).moveToElement(b).release().perform();
 	}
 
 }
