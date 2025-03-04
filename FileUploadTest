@@ -1,0 +1,30 @@
+package TheRedirect;
+import java.io.File;
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class FileUploadTest {
+    public static void main(String[] args) throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://the-internet.herokuapp.com/upload");
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        WebElement chooseFile = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("file-upload")));
+        // ✅ Ensure correct file path
+        String filePath = new File("D:\\Users\\Sneha Canbridge\\some-file.txt").getAbsolutePath();
+        System.out.println("Uploading file from path: " + filePath);
+        chooseFile.sendKeys(filePath);
+        WebElement uploadButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("file-submit")));
+        uploadButton.click();
+        Thread.sleep(2000);
+        System.out.println("File uploaded successfully!");
+        driver.quit();
+    }
+}
