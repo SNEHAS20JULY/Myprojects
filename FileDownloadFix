@@ -1,0 +1,28 @@
+package TheRedirect;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import java.util.List;
+
+public class FileDownloadFix {
+    public static void main(String[] args) {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://the-internet.herokuapp.com/download"); // Open download page
+
+        // Find only file links (not divs or headers)
+        List<WebElement> fileLinks = driver.findElements(By.cssSelector("a[href^='download/']"));
+
+        // Ensure there are at least 5 files available
+        int filesToDownload = Math.min(5, fileLinks.size());
+
+        if (filesToDownload == 0) {
+            System.out.println("No files found for download.");
+        } else {
+            for (int i = 0; i < filesToDownload; i++) {
+                fileLinks.get(i).click(); // Click to download file
+                System.out.println("Downloading: " + fileLinks.get(i).getText());
+            }
+        }
+
+        driver.quit();
+    }
+}
